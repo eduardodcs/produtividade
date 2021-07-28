@@ -12,16 +12,19 @@ public class Funcionario {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String nome;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 	private Status status = Status.ATIVO;
+	
+	public Funcionario() {
+	}
 	
 	public Funcionario(String nome) {
 		this.nome = nome;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 

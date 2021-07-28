@@ -12,7 +12,7 @@ public class TipoServico {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id;
+	private Long id;
 	private String descricao;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 	private Status status = Status.ATIVO;
@@ -21,7 +21,7 @@ public class TipoServico {
 		this.descricao = descricao;
 	}
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
