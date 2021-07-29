@@ -17,6 +17,9 @@ public class TipoServico {
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 	private Status status = Status.ATIVO;
 	
+	public TipoServico() {
+	}
+	
 	public TipoServico(String descricao) {
 		this.descricao = descricao;
 	}
