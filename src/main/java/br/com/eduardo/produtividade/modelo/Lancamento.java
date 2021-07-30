@@ -1,6 +1,5 @@
 package br.com.eduardo.produtividade.modelo;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -11,8 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
-import br.com.eduardo.produtividade.service.CalculaHorasService;
-import br.com.eduardo.produtividade.service.CalculaMediaProducaoService;
 
 @Entity
 public class Lancamento {
@@ -23,16 +20,21 @@ public class Lancamento {
 	private LocalDate dataLancamento;
 	@ManyToOne
 	private Funcionario funcionario;
+	@ManyToOne
+	private TipoServico servico;
 	private Integer quantidade;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
 
-	public Lancamento(LocalDate dataLancamento, Funcionario funcionario, Integer quantidade, LocalTime horaInicio,
+	public Lancamento() {
+	}
+	
+	public Lancamento(LocalDate dataLancamento, Funcionario funcionario, TipoServico servico, Integer quantidade, LocalTime horaInicio,
 			LocalTime horaFim) {
-		
 		this.dataLancamento = dataLancamento;
 		this.funcionario = funcionario;
+		this.servico = servico;
 		this.quantidade = quantidade;
 		this.horaInicio = horaInicio;
 		this.horaFim = horaFim;
@@ -92,6 +94,14 @@ public class Lancamento {
 
 	public void setDataCriacao(LocalDateTime dataCriacao) {
 		this.dataCriacao = dataCriacao;
+	}
+
+	public TipoServico getServico() {
+		return servico;
+	}
+
+	public void setServico(TipoServico servico) {
+		this.servico = servico;
 	}
 
 }

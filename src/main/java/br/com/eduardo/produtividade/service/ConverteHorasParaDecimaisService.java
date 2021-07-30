@@ -3,7 +3,7 @@ package br.com.eduardo.produtividade.service;
 import java.text.DecimalFormat;
 import java.time.LocalTime;
 
-public class ConverteHorasService {
+public class ConverteHorasParaDecimaisService {
 
 	DecimalFormat formato = new DecimalFormat("#.##");
 	
@@ -19,7 +19,6 @@ public class ConverteHorasService {
 		
 		horaDecimal = Double.valueOf(formato.format(horaDecimal/60).replace(',', '.'));
 		
-		System.out.println(horaDecimal);
 		return horaDecimal;
 	}
 	

@@ -3,6 +3,8 @@ package br.com.eduardo.produtividade.modelo;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,6 +17,7 @@ public class Funcionario {
 	private Long id;
 	private String nome;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
+	@Enumerated(EnumType.STRING)
 	private Status status = Status.ATIVO;
 	
 	public Funcionario() {

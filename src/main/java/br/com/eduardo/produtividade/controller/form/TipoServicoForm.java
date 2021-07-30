@@ -8,6 +8,9 @@ public class TipoServicoForm {
 
 	@NotEmpty
 	private String descricao;
+	@NotEmpty
+	private Long meta;
+	
 
 	public String getDescricao() {
 		return descricao;
@@ -17,9 +20,16 @@ public class TipoServicoForm {
 		this.descricao = descricao;
 	}
 
+	public Long getMeta() {
+		return meta;
+	}
+
+	public void setMeta(Long meta) {
+		this.meta = meta;
+	}
+
 	public TipoServico converter() {
 		return new TipoServico(descricao);
 	}
-	
 	
 }

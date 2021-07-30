@@ -5,7 +5,7 @@ import java.time.LocalTime;
 
 public class CalculaHorasService {
 
-	ConverteHorasService converte = new ConverteHorasService();
+	ConverteHorasParaDecimaisService converte = new ConverteHorasParaDecimaisService();
 	DecimalFormat formato = new DecimalFormat("#.##");
 	
 	public Double calculaQuantidadeDeHoras(LocalTime inicio, LocalTime fim) {

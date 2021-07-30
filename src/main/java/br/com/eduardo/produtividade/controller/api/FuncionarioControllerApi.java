@@ -30,6 +30,7 @@ import br.com.eduardo.produtividade.controller.form.FuncionarioForm;
 import br.com.eduardo.produtividade.modelo.Funcionario;
 import br.com.eduardo.produtividade.repository.FuncionarioRepository;
 
+
 @RestController
 @RequestMapping("/api/funcionario")
 public class FuncionarioControllerApi {
@@ -55,7 +56,7 @@ public class FuncionarioControllerApi {
 		Funcionario funcionario = form.converter();
 		funcionarioRepository.save(funcionario);
 		
-		URI uri = uriBuilder.path("/api/funcionario/{id}").buildAndExpand(funcionario.getId()).toUri();
+		URI uri = uriBuilder.path("/api/tipo-servico/{id}").buildAndExpand(funcionario.getId()).toUri();
 		return ResponseEntity.created(uri).body(new FuncionarioDto(funcionario));
 	}
 	
