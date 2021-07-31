@@ -5,7 +5,6 @@ import java.time.LocalTime;
 
 import org.springframework.data.domain.Page;
 
-import br.com.eduardo.produtividade.modelo.Funcionario;
 import br.com.eduardo.produtividade.modelo.Lancamento;
 import br.com.eduardo.produtividade.modelo.Meta;
 import br.com.eduardo.produtividade.modelo.TipoServico;
@@ -17,8 +16,8 @@ public class DetalhesLancamentoDto {
 
 	private Long id;
 	private LocalDate dataLancamento;
-	private Funcionario funcionario;
-	private TipoServico servico;
+	private String funcionario;
+	private String servico;
 	private Integer quantidade;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
@@ -29,14 +28,14 @@ public class DetalhesLancamentoDto {
 	public DetalhesLancamentoDto(Lancamento lancamento) {
 		this.id = lancamento.getId();
 		this.dataLancamento = lancamento.getDataLancamento();
-		this.funcionario = lancamento.getFuncionario();
-		this.servico = lancamento.getServico();
+		this.funcionario = lancamento.getFuncionario().getNome();
+		this.servico = lancamento.getServico().getDescricao();
 		this.quantidade = lancamento.getQuantidade();
 		this.horaInicio = lancamento.getHoraInicio();
 		this.horaFim = lancamento.getHoraFim();
 		this.setTotalHoras(horaInicio, horaFim);
 		this.setMedia(quantidade, totalHoras);
-		this.setMetaBatida(media, servico);
+		this.setMetaBatida(media, lancamento.getServico());
 	}
 
 	public Long getId() {
@@ -55,11 +54,11 @@ public class DetalhesLancamentoDto {
 		this.dataLancamento = dataLancamento;
 	}
 
-	public Funcionario getFuncionario() {
+	public String getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(String funcionario) {
 		this.funcionario = funcionario;
 	}
 
@@ -109,6 +108,14 @@ public class DetalhesLancamentoDto {
 
 	public void setMetaBatida(Double media, TipoServico servico) {
 		this.metaBatida = new ConfereMetaBatida().confereMeta(media, servico);
+	}
+
+	public String getServico() {
+		return servico;
+	}
+
+	public void setServico(String servico) {
+		this.servico = servico;
 	}
 
 	public static Page<DetalhesLancamentoDto> converter(Page<Lancamento> lancamento) {

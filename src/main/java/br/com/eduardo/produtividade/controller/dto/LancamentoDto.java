@@ -5,7 +5,6 @@ import java.time.LocalTime;
 
 import org.springframework.data.domain.Page;
 
-import br.com.eduardo.produtividade.modelo.Funcionario;
 import br.com.eduardo.produtividade.modelo.Lancamento;
 import br.com.eduardo.produtividade.modelo.Meta;
 import br.com.eduardo.produtividade.modelo.TipoServico;
@@ -17,8 +16,8 @@ public class LancamentoDto {
 
 	private Long id;
 	private LocalDate dataLancamento;
-	private Funcionario funcionario;
-	private TipoServico servico;
+	private String funcionario;
+	private String servico;
 	private Integer quantidade;
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
@@ -29,14 +28,14 @@ public class LancamentoDto {
 	public LancamentoDto(Lancamento lancamento) {
 		this.id = lancamento.getId();
 		this.dataLancamento = lancamento.getDataLancamento();
-		this.funcionario = lancamento.getFuncionario();
-		this.setServico(lancamento.getServico());
+		this.funcionario = lancamento.getFuncionario().getNome();
+		this.setServico(lancamento.getServico().getDescricao());
 		this.quantidade = lancamento.getQuantidade();
 		this.horaInicio = lancamento.getHoraInicio();
 		this.horaFim = lancamento.getHoraFim();
 		this.setTotalHoras(horaInicio, horaFim);
 		this.setMedia(quantidade, totalHoras);
-		this.setMetaBatida(media, getServico());
+		this.setMetaBatida(media, lancamento.getServico());
 	}
 
 	public Long getId() {
@@ -55,11 +54,11 @@ public class LancamentoDto {
 		this.dataLancamento = dataLancamento;
 	}
 
-	public Funcionario getFuncionario() {
+	public String getFuncionario() {
 		return funcionario;
 	}
 
-	public void setFuncionario(Funcionario funcionario) {
+	public void setFuncionario(String funcionario) {
 		this.funcionario = funcionario;
 	}
 
@@ -111,11 +110,11 @@ public class LancamentoDto {
 		this.metaBatida = new ConfereMetaBatida().confereMeta(media, servico);
 	}
 
-	public TipoServico getServico() {
+	public String getServico() {
 		return servico;
 	}
 
-	public void setServico(TipoServico servico) {
+	public void setServico(String servico) {
 		this.servico = servico;
 	}
 	

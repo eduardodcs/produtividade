@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import br.com.eduardo.produtividade.DomainException;
 import br.com.eduardo.produtividade.controller.dto.DetalhesLancamentoDto;
 import br.com.eduardo.produtividade.controller.dto.LancamentoDto;
 import br.com.eduardo.produtividade.controller.form.AtualizacaoLancamentoForm;
@@ -60,10 +61,12 @@ public class LancamentoControllerApi {
 	@Transactional
 	public ResponseEntity<LancamentoDto> cadastrar(@RequestBody @Valid LancamentoForm form, UriComponentsBuilder uriBuilder){
 		Lancamento lancamento = form.converter(funcionarioRepository, tipoServicoRepository);
-		lancamentoRepository.save(lancamento);
-		
-		URI uri = uriBuilder.path("/api/funcionario/{id}").buildAndExpand(lancamento.getId()).toUri();
-		return ResponseEntity.created(uri).body(new LancamentoDto(lancamento));
+		if(lancamento.getHoraInicio().isBefore(lancamento.getHoraFim()) ) {
+			lancamentoRepository.save(lancamento);
+			URI uri = uriBuilder.path("/api/funcionario/{id}").buildAndExpand(lancamento.getId()).toUri();
+			return ResponseEntity.created(uri).body(new LancamentoDto(lancamento));
+		}
+		throw new DomainException("A hora de inicio não pode se posterior a hora fim");
 	}
 	
 	@GetMapping("/{id}")
@@ -81,8 +84,11 @@ public class LancamentoControllerApi {
 	public ResponseEntity<LancamentoDto> atualizar(@PathVariable Long id, @RequestBody @Valid AtualizacaoLancamentoForm form){
 		Optional<Lancamento> optional = lancamentoRepository.findById(id);
 		if(optional.isPresent()) {
-			Lancamento lancamento = form.atualizar(id, lancamentoRepository);
-			return ResponseEntity.ok(new LancamentoDto(lancamento));
+			if(optional.get().getHoraInicio().isBefore(optional.get().getHoraFim()) ) {
+				Lancamento lancamento = form.atualizar(id, lancamentoRepository, funcionarioRepository, tipoServicoRepository);
+				return ResponseEntity.ok(new LancamentoDto(lancamento));
+			}
+			throw new DomainException("A hora de inicio não pode se posterior a hora fim");
 		}
 		return ResponseEntity.notFound().build();
 	}

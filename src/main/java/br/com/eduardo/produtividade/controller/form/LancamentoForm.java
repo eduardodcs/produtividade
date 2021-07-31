@@ -1,7 +1,5 @@
 package br.com.eduardo.produtividade.controller.form;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -30,7 +28,7 @@ public class LancamentoForm {
 	@NotNull
 	private Long servicoId;
 	@NotNull
-	private int quantidade;
+	private Integer quantidade;
 	@NotEmpty
 	private String horaInicio;
 	@NotEmpty
