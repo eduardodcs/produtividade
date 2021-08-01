@@ -38,7 +38,7 @@ Também é possível visualizar os dados resumidos por funcionário. Caso tenha 
 
   </br></br>
 
-  ![Select Import](C:\Users\eddce\OneDrive\PROJETOS\produtividade\imagens-readme\Select Import.jpg)
+  ![Select Import](https://github.com/eduardodcs/produtividade/blob/main/imagens-readme/Select%20Import.jpg?raw=true)
 
   </br></br>
 
@@ -46,7 +46,7 @@ Também é possível visualizar os dados resumidos por funcionário. Caso tenha 
 
   </br></br>
 
-  ![Select Maven Project](C:\Users\eddce\OneDrive\PROJETOS\produtividade\imagens-readme\Select Maven Project.jpg)
+  ![Select Maven Project](https://github.com/eduardodcs/produtividade/blob/main/imagens-readme/Select%20Maven%20Project.jpg?raw=true)
 
   </br></br>
 
@@ -58,7 +58,7 @@ Também é possível visualizar os dados resumidos por funcionário. Caso tenha 
 
   </br></br>
 
-  ![Run As](C:\Users\eddce\OneDrive\PROJETOS\produtividade\imagens-readme\Run As.jpg)
+  ![Run As](https://github.com/eduardodcs/produtividade/blob/main/imagens-readme/Run%20As.jpg?raw=true)
 
   </br></br>
 
@@ -66,7 +66,7 @@ Também é possível visualizar os dados resumidos por funcionário. Caso tenha 
 
   </br></br>
 
-  ![SwaggerUI](C:\Users\eddce\OneDrive\PROJETOS\produtividade\imagens-readme\SwaggerUI.jpg)
+  ![SwaggerUI](https://github.com/eduardodcs/produtividade/blob/main/imagens-readme/SwaggerUI.jpg?raw=true)
 
   </br></br>
 
@@ -74,7 +74,7 @@ Também é possível visualizar os dados resumidos por funcionário. Caso tenha 
 
   </br></br>
 
-  ![Postman](C:\Users\eddce\OneDrive\PROJETOS\produtividade\imagens-readme\Postman.jpg)
+  ![Postman](https://github.com/eduardodcs/produtividade/blob/main/imagens-readme/Postman.jpg?raw=true)
 
   </br></br>
 
