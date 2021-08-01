@@ -7,17 +7,17 @@ import br.com.eduardo.produtividade.modelo.Funcionario;
 public class RelatorioFuncionarioRespostaDto {
 
 	private Funcionario funcionario;
-	private List<DadosResumidosRelatorio> dados;
+	private List<DadosResumidosRelatorioFuncionario> dados;
 	public Funcionario getFuncionario() {
 		return funcionario;
 	}
 	public void setFuncionario(Funcionario funcionario) {
 		this.funcionario = funcionario;
 	}
-	public List<DadosResumidosRelatorio> getDados() {
+	public List<DadosResumidosRelatorioFuncionario> getDados() {
 		return dados;
 	}
-	public void setDados(List<DadosResumidosRelatorio> dados) {
+	public void setDados(List<DadosResumidosRelatorioFuncionario> dados) {
 		this.dados = dados;
 	}
 

@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.com.eduardo.produtividade.controller.api.RelatorioFuncionarioApi;
 import br.com.eduardo.produtividade.controller.relatorio.dto.RelatorioFuncionarioDto;
+import br.com.eduardo.produtividade.controller.relatorio.dto.RelatorioTodosFuncionariosDto;
 import br.com.eduardo.produtividade.modelo.Lancamento;
 
 public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
@@ -29,5 +30,18 @@ public interface LancamentoRepository extends JpaRepository<Lancamento, Long> {
 			+ "ORDER BY dataLancamento"
 			, nativeQuery = true)
 	List<RelatorioFuncionarioDto> findByDatas(Long id, LocalDate inicio, LocalDate fim);
+
+	@Query(value = "SELECT L.DATA_LANCAMENTO AS dataLancamento, "
+			+ "L.SERVICO_ID AS servicoId, "
+			+ "L.FUNCIONARIO_ID AS funcionarioId, "
+			+ "SUM(L.QUANTIDADE) AS quantidade, "
+			+ "SUM(L.TOTAL_HORAS) AS totalHoras, "
+			+ "FROM LANCAMENTO L "
+			+ "WHERE L.DATA_LANCAMENTO >= :inicio "
+			+ "AND L.DATA_LANCAMENTO < :fim "
+			+ "GROUP BY funcionarioId, servicoId, dataLancamento "
+			+ "ORDER BY dataLancamento"
+			, nativeQuery = true)
+	List<RelatorioTodosFuncionariosDto> findAllByDatas(LocalDate inicio, LocalDate fim);
 	
 }

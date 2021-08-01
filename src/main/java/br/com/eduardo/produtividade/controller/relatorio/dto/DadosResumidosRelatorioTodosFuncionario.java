@@ -4,29 +4,34 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import br.com.eduardo.produtividade.modelo.Funcionario;
 import br.com.eduardo.produtividade.modelo.Meta;
 import br.com.eduardo.produtividade.modelo.TipoServico;
+import br.com.eduardo.produtividade.repository.FuncionarioRepository;
 import br.com.eduardo.produtividade.repository.TipoServicoRepository;
 import br.com.eduardo.produtividade.service.CalculaMediaProducaoService;
 import br.com.eduardo.produtividade.service.ConfereMetaBatida;
 
-public class DadosResumidosRelatorio {
+public class DadosResumidosRelatorioTodosFuncionario {
 
 
 	private LocalDate dataLancamento;
 	private Integer quantidade;
 	private Double totalHoras;
 	private String servico;
+	private String funcionario;
 	private Double media;
 	private Meta metaBatida;
 
-	public DadosResumidosRelatorio(RelatorioFuncionarioDto relatorioDto, TipoServicoRepository tipoServicoRepository) {
-		this.dataLancamento = LocalDate.parse(relatorioDto.getDataLancamento());
-		this.quantidade = relatorioDto.getQuantidade();
-		this.totalHoras = relatorioDto.getTotalHoras();
-		this.setServico(relatorioDto, tipoServicoRepository);
+	public DadosResumidosRelatorioTodosFuncionario(RelatorioTodosFuncionariosDto dado
+			, TipoServicoRepository tipoServicoRepository, FuncionarioRepository funcionarioRepository) {
+		this.dataLancamento = LocalDate.parse(dado.getDataLancamento());
+		this.quantidade = dado.getQuantidade();
+		this.totalHoras = dado.getTotalHoras();
+		this.setServico(dado, tipoServicoRepository);
+		this.setFuncionario(dado, funcionarioRepository);
 		this.setMedia(quantidade, totalHoras);
-		this.setMetaBatida(media, relatorioDto, tipoServicoRepository);
+		this.setMetaBatida(media, dado, tipoServicoRepository);
 	}
 
 	public LocalDate getDataLancamento() {
@@ -57,8 +62,8 @@ public class DadosResumidosRelatorio {
 		return servico;
 	}
 
-	public void setServico(RelatorioFuncionarioDto relatorioDto, TipoServicoRepository tipoServicoRepository) {
-		Optional<TipoServico> servico = tipoServicoRepository.findById(Long.valueOf(relatorioDto.getServicoId()));
+	public void setServico(RelatorioTodosFuncionariosDto dado, TipoServicoRepository tipoServicoRepository) {
+		Optional<TipoServico> servico = tipoServicoRepository.findById(Long.valueOf(dado.getServicoId()));
 		this.servico = servico.get().getDescricao();
 	}
 
@@ -74,9 +79,18 @@ public class DadosResumidosRelatorio {
 		return metaBatida;
 	}
 
-	public void setMetaBatida(Double media, RelatorioFuncionarioDto relatorioDto, TipoServicoRepository tipoServicoRepository) {
-		Optional<TipoServico> servico = tipoServicoRepository.findById(Long.valueOf(relatorioDto.getServicoId()));
+	public void setMetaBatida(Double media, RelatorioTodosFuncionariosDto dado, TipoServicoRepository tipoServicoRepository) {
+		Optional<TipoServico> servico = tipoServicoRepository.findById(Long.valueOf(dado.getServicoId()));
 		this.metaBatida = new ConfereMetaBatida().confereMeta(media, servico.get());
+	}
+
+	public String getFuncionario() {
+		return funcionario;
+	}
+
+	public void setFuncionario(RelatorioTodosFuncionariosDto dado, FuncionarioRepository funcionarioRepository) {
+		Optional<Funcionario> funcionario = funcionarioRepository.findById(Long.valueOf(dado.getFuncionarioId()));
+		this.funcionario = funcionario.get().getNome();
 	}
 
 }
