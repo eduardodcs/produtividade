@@ -29,7 +29,7 @@ public class LancamentoDto {
 		this.id = lancamento.getId();
 		this.dataLancamento = lancamento.getDataLancamento();
 		this.funcionario = lancamento.getFuncionario().getNome();
-		this.setServico(lancamento.getServico().getDescricao());
+		this.servico = lancamento.getServico().getDescricao();
 		this.quantidade = lancamento.getQuantidade();
 		this.horaInicio = lancamento.getHoraInicio();
 		this.horaFim = lancamento.getHoraFim();
