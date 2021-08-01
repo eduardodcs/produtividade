@@ -93,7 +93,8 @@ public class LancamentoForm {
 			lancamento.setServico(servico.get());
 			lancamento.setQuantidade(quantidade);
 			lancamento.setHoraInicio(LocalTime.parse(horaInicio));
-			lancamento.setHoraFim(LocalTime.parse(horaFim));	
+			lancamento.setHoraFim(LocalTime.parse(horaFim));
+			lancamento.setTotalHoras(lancamento.getHoraInicio(), lancamento.getHoraFim());
 			return lancamento;
 		}
 		throw new DomainException("Dados incorretos");

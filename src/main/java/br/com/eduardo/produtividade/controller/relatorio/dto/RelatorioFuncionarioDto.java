@@ -1,13 +1,10 @@
-package br.com.eduardo.produtividade.controller.dto;
-
-import java.sql.Time;
+package br.com.eduardo.produtividade.controller.relatorio.dto;
 
 public interface RelatorioFuncionarioDto {
 
 	String getDataLancamento();
 	Integer getServicoId();
 	Integer getQuantidade();
-	Time getHoraInicio();
-	Time getHoraFim();
+	Double getTotalHoras();
 
 }

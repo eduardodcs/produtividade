@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import br.com.eduardo.produtividade.service.CalculaHorasService;
+
 
 @Entity
 public class Lancamento {
@@ -26,19 +28,20 @@ public class Lancamento {
 	private LocalTime horaInicio;
 	private LocalTime horaFim;
 	private LocalDateTime dataCriacao = LocalDateTime.now();
+	private Double totalHoras;
 
 	public Lancamento() {
 	}
 	
-	public Lancamento(LocalDate dataLancamento, Funcionario funcionario, TipoServico servico, Integer quantidade, LocalTime horaInicio,
-			LocalTime horaFim) {
-		this.dataLancamento = dataLancamento;
-		this.funcionario = funcionario;
-		this.servico = servico;
-		this.quantidade = quantidade;
-		this.horaInicio = horaInicio;
-		this.horaFim = horaFim;
-	}
+//	public Lancamento(LocalDate dataLancamento, Funcionario funcionario, TipoServico servico, Integer quantidade, LocalTime horaInicio,
+//			LocalTime horaFim) {
+//		this.dataLancamento = dataLancamento;
+//		this.funcionario = funcionario;
+//		this.servico = servico;
+//		this.quantidade = quantidade;
+//		this.horaInicio = horaInicio;
+//		this.horaFim = horaFim;
+//	}
 
 	public Long getId() {
 		return id;
@@ -102,6 +105,14 @@ public class Lancamento {
 
 	public void setServico(TipoServico servico) {
 		this.servico = servico;
+	}
+
+	public Double getTotalHoras() {
+		return totalHoras;
+	}
+
+	public void setTotalHoras(LocalTime horaInicio, LocalTime horaFim) {
+		this.totalHoras = new CalculaHorasService().calculaQuantidadeDeHoras(horaInicio, horaFim);
 	}
 
 }

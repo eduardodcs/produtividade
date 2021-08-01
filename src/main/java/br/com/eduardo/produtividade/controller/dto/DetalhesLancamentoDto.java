@@ -2,9 +2,11 @@ package br.com.eduardo.produtividade.controller.dto;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.data.domain.Page;
 
+import br.com.eduardo.produtividade.controller.relatorio.dto.RelatorioFuncionarioDto;
 import br.com.eduardo.produtividade.modelo.Lancamento;
 import br.com.eduardo.produtividade.modelo.Meta;
 import br.com.eduardo.produtividade.modelo.TipoServico;
@@ -13,7 +15,7 @@ import br.com.eduardo.produtividade.service.CalculaMediaProducaoService;
 import br.com.eduardo.produtividade.service.ConfereMetaBatida;
 
 public class DetalhesLancamentoDto {
-
+	
 	private Long id;
 	private LocalDate dataLancamento;
 	private String funcionario;
@@ -33,11 +35,11 @@ public class DetalhesLancamentoDto {
 		this.quantidade = lancamento.getQuantidade();
 		this.horaInicio = lancamento.getHoraInicio();
 		this.horaFim = lancamento.getHoraFim();
-		this.setTotalHoras(horaInicio, horaFim);
+		this.totalHoras = lancamento.getTotalHoras();
 		this.setMedia(quantidade, totalHoras);
 		this.setMetaBatida(media, lancamento.getServico());
 	}
-
+	
 	public Long getId() {
 		return id;
 	}
@@ -90,10 +92,6 @@ public class DetalhesLancamentoDto {
 		return totalHoras;
 	}
 
-	public void setTotalHoras(LocalTime horaInicio, LocalTime horaFim) {
-		this.totalHoras = new CalculaHorasService().calculaQuantidadeDeHoras(horaInicio, horaFim);
-	}
-	
 	public Double getMedia() {
 		return media;
 	}

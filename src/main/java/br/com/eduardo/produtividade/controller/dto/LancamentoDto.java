@@ -33,7 +33,7 @@ public class LancamentoDto {
 		this.quantidade = lancamento.getQuantidade();
 		this.horaInicio = lancamento.getHoraInicio();
 		this.horaFim = lancamento.getHoraFim();
-		this.setTotalHoras(horaInicio, horaFim);
+		this.totalHoras = lancamento.getTotalHoras();
 		this.setMedia(quantidade, totalHoras);
 		this.setMetaBatida(media, lancamento.getServico());
 	}
@@ -90,8 +90,8 @@ public class LancamentoDto {
 		return totalHoras;
 	}
 
-	public void setTotalHoras(LocalTime horaInicio, LocalTime horaFim) {
-		this.totalHoras = new CalculaHorasService().calculaQuantidadeDeHoras(horaInicio, horaFim);
+	public void setTotalHoras(Double totalHoras) {
+		this.totalHoras = totalHoras;
 	}
 	
 	public Double getMedia() {
